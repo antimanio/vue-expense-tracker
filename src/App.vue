@@ -27,18 +27,22 @@ import IncomeExpenses from './components/IncomeExpenses.vue'
 import TransactionList from './components/TransactionList.vue'
 import AddTransactions from './components/AddTransactions.vue'
 
-import { ref, computed, Transition } from 'vue'
+import { ref, computed, onMounted} from 'vue'
 import { nanoid } from 'nanoid'
 import { useToast } from 'vue-toastification'
 
 const toast = useToast()
 
-const transactionsValues = ref([ 
-  { id: 1, text: 'Phone', amount: -199.99 },
-  { id: 2, text: 'Paycheck', amount: 800 },
-  { id: 3, text: 'Grandma money', amount: 100 },
-  { id: 4, text: 'Computer', amount: -399.99 },
-  ])
+const transactionsValues = ref([])
+
+onMounted(() => {
+  const savedTransactions = JSON.parse(localStorage.getItem('transactions'))
+
+if(savedTransactions){
+  transactionsValues.value = savedTransactions
+}
+
+})
 
 
 //start the index at 0
@@ -73,6 +77,7 @@ const getExpenses = computed(() => {
     amount: transactionData.amount
   })
 
+  saveTransactionsToLocalStorage()
   toast.success('Transaction added')
  }
 
@@ -81,8 +86,13 @@ const getExpenses = computed(() => {
   transaction.id !== id
   )
 
+  saveTransactionsToLocalStorage()
   toast.success('Transaction deleted')
  }
 
+
+ const saveTransactionsToLocalStorage = () => {
+  localStorage.setItem('transactions', JSON.stringify(transactionsValues.value))
+ }
 
 </script>
