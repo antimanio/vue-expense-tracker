@@ -13,7 +13,10 @@ See [Vite Configuration Reference](https://vitejs.dev/config/).
 ## Project Setup
 
 ```sh
+npx create-vue@latest . 
 npm install
+npm install vue-toastification@next -> https://vue-toastification.maronato.dev/
+npm install nanoid 
 ```
 
 ### Compile and Hot-Reload for Development
