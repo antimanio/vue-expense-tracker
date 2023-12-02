@@ -10,6 +10,7 @@
   />
   <TransactionList
   :transactionsProp="transactionsValues" 
+  @transactionDeleted="handleTransactionDeleted"
   />
   <AddTransactions 
   @transactionsSubmitted="handleTransactionsSubmitted"
@@ -26,7 +27,7 @@ import IncomeExpenses from './components/IncomeExpenses.vue'
 import TransactionList from './components/TransactionList.vue'
 import AddTransactions from './components/AddTransactions.vue'
 
-import { ref, computed } from 'vue'
+import { ref, computed, Transition } from 'vue'
 import { nanoid } from 'nanoid'
 import { useToast } from 'vue-toastification'
 
@@ -65,7 +66,7 @@ const getExpenses = computed(() => {
  })
 
 
- const handleTransactionsSubmitted = (transactionData) =>{
+ const handleTransactionsSubmitted = (transactionData) => {
   transactionsValues.value.push({
     id: nanoid,
     text: transactionData.text,
@@ -73,6 +74,14 @@ const getExpenses = computed(() => {
   })
 
   toast.success('Transaction added')
+ }
+
+ const handleTransactionDeleted = (id) => {
+  transactionsValues.value = transactionsValues.value.filter((transaction) => 
+  transaction.id !== id
+  )
+
+  toast.success('Transaction deleted')
  }
 
 
