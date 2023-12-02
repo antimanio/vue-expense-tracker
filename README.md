@@ -1,6 +1,9 @@
 # vue-expense-tracker
 
-This template should help get you started developing with Vue 3 in Vite.
+
+![image](https://github.com/antimanio/vue-expense-tracker/assets/146827749/fcd2fedf-d3b6-42ae-93c7-6f344bbbcab9)
+
+This is expense tracker developed using Vue 3 Composition API and storing the data in localStorage.  
 
 ## Recommended IDE Setup
 
