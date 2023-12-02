@@ -28,8 +28,9 @@ import AddTransactions from './components/AddTransactions.vue'
 
 import { ref, computed } from 'vue'
 import { nanoid } from 'nanoid'
+import { useToast } from 'vue-toastification'
 
-
+const toast = useToast()
 
 const transactionsValues = ref([ 
   { id: 1, text: 'Phone', amount: -199.99 },
@@ -70,6 +71,8 @@ const getExpenses = computed(() => {
     text: transactionData.text,
     amount: transactionData.amount
   })
+
+  toast.success('Transaction added')
  }
 
 
