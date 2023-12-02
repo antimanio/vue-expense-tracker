@@ -12,7 +12,8 @@
   :transactionsProp="transactionsValues" 
   />
   <AddTransactions 
-  
+  @transactionsSubmitted="handleTransactionsSubmitted"
+
   />
  </div>
 </template>
@@ -61,6 +62,15 @@ const getExpenses = computed(() => {
   return index + transaction.amount
  }, 0).toFixed(2)
  })
+
+
+ const handleTransactionsSubmitted = (transactionData) =>{
+  transactionsValues.value.push({
+    id: nanoid,
+    text: transactionData.text,
+    amount: transactionData.amount
+  })
+ }
 
 
 </script>

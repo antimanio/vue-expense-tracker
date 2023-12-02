@@ -20,3 +20,33 @@
       </form>
 </template>
 
+
+<script setup>
+import { ref } from 'vue'
+import { useToast } from 'vue-toastification'
+
+const textRef = ref('')
+const amountRef = ref('')
+
+const emit = defineEmits(['transactionsSubmitted'])
+
+const toast = useToast()
+
+const onSubmit = () => {
+  if(!textRef.value || !amountRef.value){
+    toast.error('Both fields must be filled!')
+    return
+  }
+  
+  const transactionData = {
+      text: textRef.value,
+      amount: parseFloat(amountRef.value)
+  }
+
+  emit('transactionsSubmitted', transactionData)
+
+  textRef.value = ''
+  amountRef.value = ''
+
+}
+</script>
