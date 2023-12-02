@@ -14,7 +14,6 @@
   />
   <AddTransactions 
   @transactionsSubmitted="handleTransactionsSubmitted"
-
   />
  </div>
 </template>
@@ -27,7 +26,7 @@ import IncomeExpenses from './components/IncomeExpenses.vue'
 import TransactionList from './components/TransactionList.vue'
 import AddTransactions from './components/AddTransactions.vue'
 
-import { ref, computed, onMounted} from 'vue'
+import { ref, computed, onMounted } from 'vue'
 import { nanoid } from 'nanoid'
 import { useToast } from 'vue-toastification'
 
@@ -72,7 +71,7 @@ const getExpenses = computed(() => {
 
  const handleTransactionsSubmitted = (transactionData) => {
   transactionsValues.value.push({
-    id: nanoid,
+    id: nanoid(),
     text: transactionData.text,
     amount: transactionData.amount
   })
@@ -82,8 +81,8 @@ const getExpenses = computed(() => {
  }
 
  const handleTransactionDeleted = (id) => {
-  transactionsValues.value = transactionsValues.value.filter((transaction) => 
-  transaction.id !== id
+  transactionsValues.value = transactionsValues.value.filter(
+    (transaction) => transaction.id !== id
   )
 
   saveTransactionsToLocalStorage()
